@@ -73,22 +73,6 @@ a {
   text-decoration: none;
 }
 
-.skip-link {
-  position: absolute;
-  top: -42px;
-  left: 10px;
-  z-index: 1000;
-  padding: 10px 14px;
-  border-radius: 10px;
-  background: var(--primary);
-  color: #001324;
-  font-weight: 700;
-}
-
-.skip-link:focus {
-  top: 10px;
-}
-
 .container {
   width: min(var(--container), 92%);
   margin: 0 auto;

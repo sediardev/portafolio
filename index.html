@@ -8,22 +8,23 @@
 	<meta name="author" content="Sebastian Diaz Arrieta">
 	<meta name="robots" content="index, follow">
 	<meta name="theme-color" content="#05070f">
-	<link rel="canonical" href="https://sediardev.github.io/portafolio/">
+	<meta name="asset-version" content="20260420_1">
+	<link rel="canonical" href="https://sediar.dev/">
 
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="Portafolio de Servicios | Desarrollador Full-Stack">
 	<meta property="og:description" content="Servicios de desarrollo de software, proyectos destacados y stack tecnológico.">
-	<meta property="og:url" content="https://sediardev.github.io/portafolio/">
-	<meta property="og:image" content="https://sediardev.github.io/portafolio/img/favicon.png">
+	<meta property="og:url" content="https://sediar.dev/">
+	<meta property="og:image" content="https://sediar.dev/img/favicon.png">
 
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Portafolio de Servicios | Desarrollador Full-Stack">
 	<meta name="twitter:description" content="Servicios de desarrollo de software, proyectos destacados y stack tecnológico.">
-	<meta name="twitter:image" content="https://sediardev.github.io/portafolio/img/favicon.png">
+	<meta name="twitter:image" content="https://sediar.dev/img/favicon.png">
 
-	<link rel="icon" type="image/x-icon" href="img/favicon.ico">
-	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon.png">
-	<link rel="apple-touch-icon" href="img/favicon.png">
+	<link rel="icon" type="image/x-icon" href="img/favicon.ico" data-versioned>
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon.png" data-versioned>
+	<link rel="apple-touch-icon" href="img/favicon.png" data-versioned>
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +32,39 @@
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles.css" data-versioned>
+
+	<script>
+		(() => {
+			const versionMeta = document.querySelector('meta[name="asset-version"]');
+			const version = versionMeta ? versionMeta.content.trim() : "";
+
+			if (!version) return;
+
+			const addVersion = (url) => {
+				if (!url || /^(https?:|data:|blob:|#)/i.test(url)) return url;
+				const [baseWithQuery, hashPart = ""] = url.split("#");
+				const [pathPart, queryPart = ""] = baseWithQuery.split("?");
+				const params = new URLSearchParams(queryPart);
+				params.set("v", version);
+				return `${pathPart}?${params.toString()}${hashPart ? `#${hashPart}` : ""}`;
+			};
+
+			const applyVersion = (root = document) => {
+				root.querySelectorAll("[data-versioned]").forEach((el) => {
+					if (el.hasAttribute("href")) {
+						el.setAttribute("href", addVersion(el.getAttribute("href")));
+					}
+					if (el.hasAttribute("src")) {
+						el.setAttribute("src", addVersion(el.getAttribute("src")));
+					}
+				});
+			};
+
+			applyVersion();
+			document.addEventListener("DOMContentLoaded", () => applyVersion());
+		})();
+	</script>
 
 	<script type="application/ld+json">
 		{
@@ -40,19 +73,17 @@
 			"name": "Sebastian Diaz Arrieta",
 			"jobTitle": "Desarrollador Full-Stack",
 			"description": "Programador especializado en desarrollo web full-stack y soluciones digitales.",
-			"url": "https://sediardev.github.io/portafolio/",
-			"image": "https://sediardev.github.io/portafolio/img/favicon.png",
+			"url": "https://sediar.dev/",
+			"image": "https://sediar.dev/img/favicon.png",
 			"knowsAbout": ["PHP", "JavaScript", "Laravel", "C#", "Vue", "Python", "Spring Boot", "PostgreSQL", "MySQL", "Docker", "MongoDB", "GitHub Actions"]
 		}
 	</script>
 </head>
 <body>
-	<a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
-
 	<header class="site-header" id="inicio">
 		<div class="container nav-wrap">
 			<a class="brand" href="#inicio" aria-label="Ir al inicio del portafolio">
-				<img src="img/favicon.png" alt="Logotipo del portafolio" width="28" height="28" loading="eager" decoding="async">
+				<img src="img/favicon.png" alt="Logotipo del portafolio" width="28" height="28" loading="eager" decoding="async" data-versioned>
 				<span>Sediar Dev</span>
 			</a>
 
@@ -126,7 +157,7 @@
 				<div class="projects-grid">
 					<article class="project-card">
 						<div class="project-cover">
-							<img src="img/clientes/bedviajes.png" alt="Vista previa del proyecto Bed Viajes" loading="lazy" decoding="async">
+							<img src="img/clientes/bedviajes.png" alt="Vista previa del proyecto Bed Viajes" loading="lazy" decoding="async" data-versioned>
 						</div>
 						<div class="project-body">
 							<h3>BedViajes</h3>
@@ -137,7 +168,7 @@
 
 					<article class="project-card">
 						<div class="project-cover">
-							<img src="img/clientes/bestbooking.webp" alt="Vista previa del proyecto Best Booking" loading="lazy" decoding="async">
+							<img src="img/clientes/bestbooking.webp" alt="Vista previa del proyecto Best Booking" loading="lazy" decoding="async" data-versioned>
 						</div>
 						<div class="project-body">
 							<h3>BestBooking</h3>
@@ -148,7 +179,7 @@
 
 					<article class="project-card">
 						<div class="project-cover">
-							<img src="img/clientes/transito_app.png" alt="Vista previa del proyecto Transito App" loading="lazy" decoding="async">
+							<img src="img/clientes/transito_app.png" alt="Vista previa del proyecto Transito App" loading="lazy" decoding="async" data-versioned>
 						</div>
 						<div class="project-body">
 							<h3>Transito App</h3>
@@ -159,7 +190,7 @@
 
 					<article class="project-card">
 						<div class="project-cover">
-							<img src="img/clientes/diez_equis.png" alt="Vista previa del proyecto Diez Equis" loading="lazy" decoding="async">
+							<img src="img/clientes/diez_equis.png" alt="Vista previa del proyecto Diez Equis" loading="lazy" decoding="async" data-versioned>
 						</div>
 						<div class="project-body">
 							<h3>Diez Equis</h3>
