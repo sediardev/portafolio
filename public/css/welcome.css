@@ -335,7 +335,7 @@ h1 {
 .project-card {
   border-radius: var(--radius);
   perspective: 1200px;
-  min-height: 390px;
+  min-height: 520px;
 }
 
 .project-card:hover {
@@ -345,7 +345,7 @@ h1 {
 .project-card-inner {
   position: relative;
   width: 100%;
-  min-height: 390px;
+  min-height: 520px;
   transform-style: preserve-3d;
   transition: transform 620ms ease;
 }
@@ -697,6 +697,11 @@ h1 {
 
   .projects-grid {
     gap: 14px;
+  }
+
+  .project-card,
+  .project-card-inner {
+    min-height: 500px;
   }
 
   .contact-links {
