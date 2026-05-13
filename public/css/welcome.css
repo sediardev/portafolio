@@ -213,6 +213,7 @@ h1 {
   margin: 0;
   font-size: clamp(2rem, 6vw, 3.7rem);
   line-height: 1.1;
+  display: block;
 }
 
 .hero strong {
@@ -224,6 +225,8 @@ h1 {
   max-width: 62ch;
   color: var(--muted);
   font-size: 1.1rem;
+  line-height: 1.5;
+  min-height: 3.3em;
 }
 
 .actions {
@@ -329,21 +332,47 @@ h1 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.projects-grid > .project-card:last-child {
-  grid-column: 2;
-}
-
 .project-card {
-  border: 1px solid var(--border);
   border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--surface-alt);
-  transition: transform 180ms ease, border-color 180ms ease;
+  perspective: 1200px;
+  min-height: 390px;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(28, 163, 255, 0.5);
+}
+
+.project-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 390px;
+  transform-style: preserve-3d;
+  transition: transform 620ms ease;
+}
+
+.project-card.is-flipped .project-card-inner {
+  transform: rotateY(180deg);
+}
+
+.project-face {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-alt);
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 1px rgba(28, 163, 255, 0.12), 0 16px 40px rgba(28, 163, 255, 0.1);
+}
+
+.project-face-front {
+  transform: rotateY(0deg);
+}
+
+.project-face-back {
+  transform: rotateY(180deg);
 }
 
 .project-cover {
@@ -364,10 +393,14 @@ h1 {
 
 .project-body {
   padding: 18px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .project-body h3 {
-  margin: 0 0 10px;
+  margin: 0;
   font-size: 1.08rem;
 }
 
@@ -376,9 +409,16 @@ h1 {
   color: var(--muted);
 }
 
+.project-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
 .project-link {
   display: inline-flex;
-  margin-top: 12px;
   font-weight: 600;
   color: var(--primary);
 }
@@ -386,6 +426,62 @@ h1 {
 .project-link:hover,
 .project-link:focus-visible {
   color: #7cc9ff;
+}
+
+.project-flip-btn {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.project-flip-btn:hover,
+.project-flip-btn:focus-visible {
+  border-color: rgba(28, 163, 255, 0.5);
+  background: rgba(28, 163, 255, 0.12);
+}
+
+.project-back-body {
+  justify-content: flex-start;
+}
+
+.project-back-label {
+  margin: 0;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+}
+
+.project-tech-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.project-tech-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid rgba(156, 168, 201, 0.3);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #dce3f7;
+  font-weight: 500;
+}
+
+.project-tech-item i {
+  font-size: 1.3rem;
+  line-height: 1;
 }
 
 .skill-list {
@@ -600,10 +696,6 @@ h1 {
     gap: 14px;
   }
 
-  .projects-grid > .project-card:last-child {
-    grid-column: auto;
-  }
-
   .contact-links {
     grid-template-columns: 1fr;
   }
@@ -658,4 +750,131 @@ h1 {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
 }
+
+/* ── Tech background grid ─────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(28, 163, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28, 163, 255, 0.022) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Section title accent ─────────────────────────────────────────────────── */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, var(--primary), transparent);
+  border-radius: 999px;
+}
+
+/* ── Typewriter in lead text ──────────────────────────────────────────────── */
+.lead-dynamic {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.tw-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--primary);
+  margin-left: 2px;
+  vertical-align: -0.08em;
+  border-radius: 1px;
+  animation: cursorBlink 0.9s step-end infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Scroll reveal ────────────────────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal][data-delay='1'] { transition-delay: 0.10s; }
+[data-reveal][data-delay='2'] { transition-delay: 0.20s; }
+[data-reveal][data-delay='3'] { transition-delay: 0.30s; }
+[data-reveal][data-delay='4'] { transition-delay: 0.40s; }
+[data-reveal][data-delay='5'] { transition-delay: 0.50s; }
+[data-reveal][data-delay='6'] { transition-delay: 0.60s; }
+
+/* ── Hero card float ──────────────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+.hero-card {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* ── Skill item hover ─────────────────────────────────────────────────────── */
+.skill-item {
+  transition: border-color 200ms ease, background-color 200ms ease, transform 200ms ease;
+}
+
+.skill-item:hover {
+  border-color: rgba(28, 163, 255, 0.5);
+  background: rgba(28, 163, 255, 0.08);
+  transform: translateX(4px);
+}
+
+/* ── Tech icon glow on hover ──────────────────────────────────────────────── */
+.tech-item i {
+  transition: filter 250ms ease;
+}
+
+.swiper-slide:hover .tech-item i {
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+/* ── Kicker pulse dot ─────────────────────────────────────────────────────── */
+.kicker::after {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+  margin-left: 8px;
+  vertical-align: middle;
+  animation: pulseDot 2.2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(28, 163, 255, 0.7); }
+  60%       { box-shadow: 0 0 0 7px rgba(28, 163, 255, 0); }
+}
+
+/* ── Contact link glow ────────────────────────────────────────────────────── */
+.contact-link:hover,
+.contact-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(28, 163, 255, 0.45);
+  box-shadow: 0 0 0 1px rgba(28, 163, 255, 0.2), 0 8px 24px rgba(28, 163, 255, 0.08);
+}
+

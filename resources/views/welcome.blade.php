@@ -1,16 +1,3 @@
-@php
-	$appUrl = rtrim(config('app.url'), '/').'/';
-	$schema = [
-		'@context' => 'https://schema.org',
-		'@type' => 'Person',
-		'name' => 'Sebastian Diaz Arrieta',
-		'jobTitle' => 'Desarrollador Full-Stack',
-		'description' => 'Programador especializado en desarrollo web full-stack y soluciones digitales.',
-		'url' => $appUrl,
-		'image' => versioned_asset('img/favicon.png'),
-		'knowsAbout' => ['PHP', 'JavaScript', 'Laravel', 'C#', 'Vue', 'Python', 'Spring Boot', 'PostgreSQL', 'MySQL', 'Docker', 'MongoDB', 'GitHub Actions'],
-	];
-@endphp
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -80,8 +67,8 @@
 			<div class="container hero-grid">
 				<div>
 					<p class="kicker">Servicios de desarrollo web</p>
-					<h1 id="titulo-principal">Construyo productos digitales <strong>rápidos, escalables y mantenibles</strong></h1>
-					<p class="lead">Soy desarrollador full-stack y ayudo a empresas y emprendedores a convertir ideas en aplicaciones web robustas.</p>
+					<h1 id="titulo-principal">Construyo productos digitales <strong>rapidos, escalables y mantenibles</strong></h1>
+					<p class="lead"><span id="typewriter-text" class="lead-dynamic" aria-live="polite" aria-atomic="true"></span><span class="tw-cursor" aria-hidden="true"></span></p>
 
 					<div class="actions" role="group" aria-label="Acciones principales">
 						<a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
@@ -89,13 +76,13 @@
 					</div>
 
 					<p class="stats" aria-label="Datos destacados del perfil">
-						<span><b>+6</b> años programando</span>
-						<span><b>+4</b> proyectos</span>
+						<span><b>+{{ $yearsOfExperience }}</b> años programando</span>
+						<span><b>+{{ $numberOfProjects }}</b> proyectos</span>
 						<span><b>99%</b> satisfacción del cliente</span>
 					</p>
 				</div>
 
-				<aside class="hero-card" aria-label="Especialidad profesional">
+				<aside class="hero-card" aria-label="Especialidad profesional" data-reveal data-delay="1">
 					<h2>Especialidad</h2>
 					<p>Arquitectura web moderna, APIs, automatización de procesos con ia y maquetado de bases de datos.</p>
 				</aside>
@@ -108,13 +95,13 @@
 				<p class="section-subtitle">Soy ingeniero de sistemas con más de 6 años de experiencia en el desarrollo de soluciones digitales orientadas a mejorar procesos y facilitar la operación de las organizaciones.</p>
 
 				<div class="about-grid">
-					<article class="card">
+					<article class="card" data-reveal data-delay="1">
 						<p>A lo largo de los proyectos en los que he participado, he contribuido al análisis de necesidades, diseño de soluciones y desarrollo de aplicaciones, buscando siempre que las herramientas implementadas sean útiles, sostenibles y realmente adoptadas por los usuarios.</p>
 					</article>
-					<article class="card">
+					<article class="card" data-reveal data-delay="2">
 						<p>Me interesa comprender el problema antes de plantear una solución, evaluando alternativas y priorizando aquellas que aporten valor práctico. He trabajado en entornos donde es necesario equilibrar lo técnico con lo operativo, colaborando con equipos multidisciplinarios y adaptando las soluciones al contexto real.</p>
 					</article>
-					<article class="card">
+					<article class="card" data-reveal data-delay="3">
 						<p>Trabajo bajo enfoques ágiles cuando aportan claridad al proceso, manteniendo una visión flexible y orientada a resultados.</p>
 					</article>
 				</div>
@@ -126,49 +113,41 @@
 				<h2 class="section-title" id="titulo-proyectos">Proyectos</h2>
 
 				<div class="projects-grid">
-					<article class="project-card">
-						<div class="project-cover">
-							<img src="{{ versioned_asset('img/clientes/bedviajes.png') }}" alt="Vista previa del proyecto Bed Viajes" loading="lazy" decoding="async">
-						</div>
-						<div class="project-body">
-							<h3>BedViajes</h3>
-							<p>Plataforma orientada publicar y gestionar propiedades vacacionales, ofreciendo alojamientos seguros, de calidad y reservas confiables para turistas nacionales e internacionales.</p>
-							<a class="project-link" href="https://bedviajes.com/" target="_blank" rel="noopener noreferrer">Visitar proyecto</a>
-						</div>
-					</article>
+					@foreach ($projects as $project)
+					<article class="project-card" data-reveal data-delay="{{ $loop->iteration }}">
+						<div class="project-card-inner">
+							<div class="project-face project-face-front">
+								<div class="project-cover">
+									<img src="{{ versioned_asset($project['image']) }}" alt="{{ $project['alt'] }}" loading="lazy" decoding="async">
+								</div>
+								<div class="project-body">
+									<h3>{{ $project['name'] }}</h3>
+									<p>{{ $project['description'] }}</p>
+									<div class="project-actions">
+										<a class="project-link" href="{{ $project['url'] }}" target="_blank" rel="noopener noreferrer">Visitar proyecto</a>
+										<button class="project-flip-btn" type="button" data-flip-card aria-label="Ver tecnologias usadas en {{ $project['name'] }}">Ver stack</button>
+									</div>
+								</div>
+							</div>
 
-					<article class="project-card">
-						<div class="project-cover">
-							<img src="{{ versioned_asset('img/clientes/bestbooking.webp') }}" alt="Vista previa del proyecto Best Booking" loading="lazy" decoding="async">
-						</div>
-						<div class="project-body">
-							<h3>BestBooking</h3>
-							<p>Solución web que conecta clientes con hoteles, tours y alojamientos, ofreciendo experiencias turísticas accesibles, personalizadas y de calidad.</p>
-							<a class="project-link" href="https://bestbooking.com.co/" target="_blank" rel="noopener noreferrer">Visitar proyecto</a>
-						</div>
-					</article>
-
-					<article class="project-card">
-						<div class="project-cover">
-							<img src="{{ versioned_asset('img/clientes/transito_app.png') }}" alt="Vista previa del proyecto Transito App" loading="lazy" decoding="async">
-						</div>
-						<div class="project-body">
-							<h3>Transito App</h3>
-							<p>Aplicación web que busca modernizar la gestión del tránsito, digitalizando procesos, mejorando eficiencia, legalidad y transparencia institucional en Colombia.</p>
-							<a class="project-link" href="https://transitoapp.co/" target="_blank" rel="noopener noreferrer">Visitar proyecto</a>
+							<div class="project-face project-face-back" inert>
+								<div class="project-body project-back-body">
+									<h3>{{ $project['name'] }}</h3>
+									<p class="project-back-label">Tecnologias usadas</p>
+									<ul class="project-tech-list" aria-label="Tecnologias del proyecto {{ $project['name'] }}">
+										@foreach ($project['stack'] as $technology)
+										<li class="project-tech-item">
+											<i class="{{ $technology->icon() }}" aria-hidden="true"></i>
+											<span>{{ $technology->value }}</span>
+										</li>
+										@endforeach
+									</ul>
+									<button class="project-flip-btn" type="button" data-flip-card aria-label="Volver a la vista principal de {{ $project['name'] }}">Volver</button>
+								</div>
+							</div>
 						</div>
 					</article>
-
-					<article class="project-card">
-						<div class="project-cover">
-							<img src="{{ versioned_asset('img/clientes/diez_equis.png') }}" alt="Vista previa del proyecto Diez Equis" loading="lazy" decoding="async">
-						</div>
-						<div class="project-body">
-							<h3>Diez Equis</h3>
-							<p>Sitio corporativo que distribuye insumos para sectores Food Service, institucional y HORECA, ofreciendo cobertura nacional, innovación, confiabilidad y soporte estratégico a negocios en Colombia..</p>
-							<a class="project-link" href="https://diezequis.com/" target="_blank" rel="noopener noreferrer">Visitar proyecto</a>
-						</div>
-					</article>
+					@endforeach
 				</div>
 			</div>
 		</section>
@@ -179,12 +158,12 @@
 				<p class="section-subtitle">Fortalezas construidas desde la migración de sistemas, la automatización de procesos y el desarrollo de soluciones que deben operar con estabilidad en contextos reales.</p>
 
 				<div class="skill-list" role="list" aria-label="Listado de habilidades">
-					<div class="skill-item" role="listitem">Migración progresiva de sistemas legacy</div>
-					<div class="skill-item" role="listitem">Diseño de procesos backend sostenibles</div>
-					<div class="skill-item" role="listitem">Integración de plataformas y servicios externos</div>
-					<div class="skill-item" role="listitem">Automatización de flujos y sincronización de datos</div>
-					<div class="skill-item" role="listitem">Desarrollo orientado a operación crítica</div>
-					<div class="skill-item" role="listitem">Colaboración técnica y decisiones de arquitectura</div>
+					<div class="skill-item" role="listitem" data-reveal data-delay="1">Migración progresiva de sistemas legacy</div>
+					<div class="skill-item" role="listitem" data-reveal data-delay="2">Diseño de procesos backend sostenibles</div>
+					<div class="skill-item" role="listitem" data-reveal data-delay="3">Integración de plataformas y servicios externos</div>
+					<div class="skill-item" role="listitem" data-reveal data-delay="4">Automatización de flujos y sincronización de datos</div>
+					<div class="skill-item" role="listitem" data-reveal data-delay="5">Desarrollo orientado a operación crítica</div>
+					<div class="skill-item" role="listitem" data-reveal data-delay="6">Colaboración técnica y decisiones de arquitectura</div>
 				</div>
 			</div>
 		</section>
@@ -193,81 +172,17 @@
 			<div class="container">
 				<h2 class="section-title" id="titulo-tecnologias">Tecnologías que he usado</h2>
 
-				<div class="tech-carousel">
+				<div class="tech-carousel" data-reveal>
 					<div class="swiper tech-swiper" aria-label="Carrusel de tecnologías">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide" aria-label="Laravel">
+							@foreach ($technologies as $techName => $techIcon)
+							<div class="swiper-slide" aria-label="{{ $techName }}">
 								<div class="tech-item">
-									<i class="devicon-laravel-plain colored" aria-hidden="true"></i>
-									<span>Laravel</span>
+									<i class="{{ $techIcon }}" aria-hidden="true"></i>
+									<span>{{ $techName }}</span>
 								</div>
 							</div>
-							<div class="swiper-slide" aria-label="PHP">
-								<div class="tech-item">
-									<i class="devicon-php-plain colored" aria-hidden="true"></i>
-									<span>PHP</span>
-								</div>
-							</div>
-							<div class="swiper-slide" aria-label="SpringBoot">
-								<div class="tech-item">
-									<i class="devicon-spring-plain colored" aria-hidden="true"></i>
-									<span>SpringBoot</span>
-								</div>
-							</div>
-							<div class="swiper-slide" aria-label="JavaScript">
-								<div class="tech-item">
-									<i class="devicon-javascript-plain colored" aria-hidden="true"></i>
-									<span>JavaScript</span>
-								</div>
-							</div>
-							<div class="swiper-slide" aria-label="C#">
-								<div class="tech-item">
-									<i class="devicon-csharp-plain colored" aria-hidden="true"></i>
-									<span>C#</span>
-								</div>
-							</div>
-							<div class="swiper-slide" aria-label="Vue">
-								<div class="tech-item">
-									<i class="devicon-vuejs-plain colored" aria-hidden="true"></i>
-									<span>Vue</span>
-								</div>
-							</div>
-							<div class="swiper-slide" aria-label="Python">
-								<div class="tech-item">
-									<i class="devicon-python-plain colored" aria-hidden="true"></i>
-									<span>Python</span>
-								</div>
-							</div>
-							<div class="swiper-slide" aria-label="PostgreSQL">
-								<div class="tech-item">
-									<i class="devicon-postgresql-plain colored" aria-hidden="true"></i>
-									<span>PostgreSQL</span>
-								</div>
-							</div>
-							<div class="swiper-slide" aria-label="MySQL">
-								<div class="tech-item">
-									<i class="devicon-mysql-plain colored" aria-hidden="true"></i>
-									<span>MySQL</span>
-								</div>
-							</div>
-							<div class="swiper-slide" aria-label="MongoDB">
-								<div class="tech-item">
-									<i class="devicon-mongodb-plain colored" aria-hidden="true"></i>
-									<span>MongoDB</span>
-								</div>
-							</div>
-							<div class="swiper-slide" aria-label="Docker">
-								<div class="tech-item">
-									<i class="devicon-docker-plain colored" aria-hidden="true"></i>
-									<span>Docker</span>
-								</div>
-							</div>
-							<div class="swiper-slide" aria-label="GitHub Actions">
-								<div class="tech-item">
-									<i class="devicon-githubactions-plain colored" aria-hidden="true"></i>
-									<span>GitHub Actions</span>
-								</div>
-							</div>
+							@endforeach
 						</div>
 						<div class="swiper-pagination"></div>
 					</div>
@@ -308,6 +223,7 @@
 		</div>
 	</footer>
 
+	<script id="tw-phrases" type="application/json">{!! json_encode($typewriterPhrases, JSON_UNESCAPED_UNICODE) !!}</script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 	<script src="{{ versioned_asset('js/welcome.js') }}"></script>
 </body>
