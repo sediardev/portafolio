@@ -377,10 +377,13 @@ h1 {
 
 .project-cover {
   height: 140px;
+  min-height: 140px;
+  max-height: 140px;
   overflow: hidden;
   background: #d7d9de;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .project-cover img {
