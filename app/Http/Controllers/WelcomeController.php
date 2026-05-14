@@ -14,10 +14,10 @@ class WelcomeController extends Controller
 
         $typewriterPhrases = [
             'Ayudo a empresas y emprendedores a convertir ideas en aplicaciones web robustas.',
-            'Diseno soluciones backend estables para procesos criticos y equipos exigentes.',
+            'Diseño soluciones backend estables para procesos críticos y equipos exigentes.',
             'Construyo APIs y plataformas escalables que soportan crecimiento real.',
             'Conecto sistemas, automatizo flujos y acelero operaciones de negocio.',
-            'Transformo necesidades tecnicas en productos web mantenibles y confiables.',
+            'Transformo necesidades técnicas en productos web mantenibles y confiables.',
         ];
 
         $technologies = Technology::keyIconMap();
@@ -25,7 +25,7 @@ class WelcomeController extends Controller
         $projects = [
             [
                 'name'        => 'BedViajes',
-                'description' => 'Plataforma para publicar y gestionar propiedades vacacionales. Desarrolle modulos clave como CRUD de alojamientos y reservas, busqueda de propiedades en mapa, reportes operativos e integracion de pasarela de pagos para reservas confiables.',
+                'description' => 'Plataforma para publicar y gestionar propiedades vacacionales. Desarrollé módulos clave como CRUD de alojamientos y reservas, búsqueda de propiedades en mapa, reportes operativos e integración de pasarela de pagos para reservas confiables.',
                 'url'         => 'https://bedviajes.com/',
                 'image'       => 'img/clientes/bedviajes.png',
                 'alt'         => 'Vista previa del proyecto Bed Viajes',
@@ -42,7 +42,7 @@ class WelcomeController extends Controller
             ],
             [
                 'name'        => 'BestBooking',
-                'description' => 'Solucion web que conecta clientes con hoteles, tours y alojamientos. Aunque no lo desarrolle desde cero, implemente mejoras y correcciones en modulos administrativos, integre pasarela de pagos, optimice reportes y agregue edicion en vivo del PDF de reserva.',
+                'description' => 'Solución web que conecta clientes con hoteles, tours y alojamientos. Aunque no lo desarrollé desde cero, implementé mejoras y correcciones en módulos administrativos, integré pasarela de pagos, optimicé reportes y agregué edición en vivo del PDF de reserva.',
                 'url'         => 'https://bestbooking.com.co/',
                 'image'       => 'img/clientes/bestbooking.webp',
                 'alt'         => 'Vista previa del proyecto Best Booking',
@@ -56,7 +56,7 @@ class WelcomeController extends Controller
             ],
             [
                 'name'        => 'Transito App',
-                'description' => 'Aplicacion web robusta para modernizar la gestion del transito en Colombia. Trabaje en componentes base del sistema, especialmente en proceso contravencional, proceso coactivo, fotomultas y gestion de titulos judiciales y mandamientos de pago.',
+                'description' => 'Aplicación web robusta para modernizar la gestión del tránsito en Colombia. Trabajé en componentes base del sistema, especialmente en proceso contravencional, proceso coactivo, fotomultas y gestión de títulos judiciales y mandamientos de pago.',
                 'url'         => 'https://transitoapp.co/',
                 'image'       => 'img/clientes/transito_app.png',
                 'alt'         => 'Vista previa del proyecto Transito App',
@@ -75,7 +75,7 @@ class WelcomeController extends Controller
             ],
             [
                 'name'        => 'Diez Equis',
-                'description' => 'Proyecto corporativo para el sector Food Service, institucional y HORECA. Mi aporte se centro en integrar la API oficial de WhatsApp con respuestas asistidas por IA y desarrollar una interfaz completa de mensajeria para recibir y enviar mensajes en multiples formatos.',
+                'description' => 'Proyecto corporativo para el sector Food Service, institucional y HORECA. Mi aporte se centró en integrar la API oficial de WhatsApp con respuestas asistidas por IA y desarrollar una interfaz completa de mensajería para recibir y enviar mensajes en múltiples formatos.',
                 'url'         => 'https://diezequis.com/',
                 'image'       => 'img/clientes/diez_equis.png',
                 'alt'         => 'Vista previa del proyecto Diez Equis',
@@ -95,7 +95,7 @@ class WelcomeController extends Controller
             ],
             [
                 'name'        => 'Ticworks',
-                'description' => 'Plataforma de contratacion de talento tecnologico tipo LinkedIn o Computrabajo. Aunque no lo desarrolle desde cero, realice ajustes visuales en modulos clave e integre una pasarela de pagos con suscripciones en USD.',
+                'description' => 'Plataforma de contratación de talento tecnológico tipo LinkedIn o Computrabajo. Realicé ajustes visuales en módulos clave e integré una pasarela de pagos con suscripciones en USD.',
                 'url'         => 'https://ticworks.tech/',
                 'image'       => 'img/clientes/ticworks.svg',
                 'alt'         => 'Vista previa del proyecto Ticworks',
